@@ -1,0 +1,45 @@
+/* Sticky footer styles
+Style inspiré de http://www.bootstrapzero.com/bootstrap-template/sticky-footer 
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  }
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #5669AC;
+  border-top: solid #fff 2px;
+
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  font-family: 'lato';
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin-top: 20px;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+

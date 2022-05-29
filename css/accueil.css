@@ -1,0 +1,122 @@
+body {
+    background-color: #B7CCF4;
+}
+
+.acc {
+    position: absolute;
+    left: 0px;
+    top: 100px;
+    background: #5669AC;
+    border-top: solid #fff 2px;
+    border-bottom: solid #fff 2px;
+
+
+}
+
+.acc li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+span {
+    background-color: #fff;
+}
+
+.navbar-toggle {
+    background-color: #334277;
+}
+
+.test {
+    padding-right: 70px;
+    padding-left: 30px;
+
+}
+
+.accc {
+    padding-right: 70px;
+    padding-left: 90px;
+
+}
+
+.nav>li>a:focus, .nav>li>a:hover
+{
+
+   border-radius: 8%;
+    background-color: #3c4770;
+
+}
+
+
+
+
+#logo {
+    position: relative;
+    width: 155px;
+    height: 155px;
+    left: 10px;
+    top: -200%;
+
+}
+
+#logo2I {
+    position: relative;
+    width: 179px;
+    height: 59px;
+    left: 0px;
+    top: 25%;
+    border-left: solid #7281b4 3px ;
+    padding-left: 15px ;
+
+}
+
+
+
+#ConnectLogo{
+    position: absolute;
+width: 25px;
+height: 24px;
+right: 40px;
+top: 37px;
+}
+
+#logout{
+    position: absolute;
+    right: 80px;
+    top: 34px;
+
+    
+
+
+font-family: 'lato';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 35px;
+text-align: center;
+
+color: #55484A;
+}
+
+@media (max-width: 555px){
+#logout {
+
+    display: none;
+
+}
+#ConnectLogo{
+    display: none;
+}
+}
+
+@media (max-width: 415px){
+    #logo2I {
+display: none;
+    }
+ 
+    }
+
+.format{
+
+    height: 30px; width : 200px; font-size : 17px
+
+}
