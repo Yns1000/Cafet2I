@@ -83,9 +83,9 @@ if (!valider("connecte","SESSION")) {
 
 
 	mkForm("controleur.php");
-	echo "</br> </br> </br> </br><ul><li class=\"active\"> <a onclick=\"affinfo(mdp,pseudo,commande);\"  href=\"#\">Modifier votre mot de passe</a></li></ul>";
-	echo "<ul><li class=\"active\"> <a onclick=\"affinfo(pseudo,commande,mdp);\" href=\"#\">Modifier votre pseudo</a></li></ul>";
-	echo "<ul><li class=\"active\"> <a onclick=\"affinfo(commande,mdp,pseudo);\" href=\"#\">Voir mon historique de commande</a></li></ul>";
+	echo "</br> </br> </br> </br><ul><li class=\"active\"> <h2> <a style=\"text-decoration :none\" onclick=\"affinfo(mdp,pseudo,commande);\"  href=\"#\">Modifier votre mot de passe</a></h2></li></ul>";
+	echo "<ul><li class=\"active\"> <h2><a style=\"text-decoration :none\" onclick=\"affinfo(pseudo,commande,mdp);\" href=\"#\">Modifier votre pseudo</a></h2></li></ul>";
+	echo "<ul><li class=\"active\"> <h2><a style=\"text-decoration :none\" onclick=\"affinfo(commande,mdp,pseudo);\" href=\"#\">Voir mon historique de commande</a></h2></li></ul>";
 
 	echo "<div id=\"mdp\">";
 	
