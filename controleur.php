@@ -80,6 +80,12 @@ session_start();
 
 						$qs = "?view=login&msg=" .urlencode("Votre compte a été crée avec succés, veuillez vous connecter."); 
 					}
+					/*else if (verifUserBdd($login,$passe)) {
+					$qs = "?view=login&msg=" .urlencode("Login déja utilisé ! Choissisez en un autre..."); 
+					break;
+					}*/
+
+
 				}
 				if (strcmp($passe,$passe2)!==0)
 				$qs = "?view=login&msg=" .urlencode("Les mots de passe saisis ne concordent pas."); 
@@ -210,9 +216,9 @@ session_start();
 				if (is_array($idCom)) {
 					foreach($idCom as $nextIdCom) {
 
-						$verif = "SELECT livraison FROM commandes where id_commande ='$idCom'";
+						$verif = "SELECT livraison, valide FROM commandes where id_commande ='$idCom'";
 						$verif2 = parcoursRs(SQLSelect($verif));
-					if($verif2[0]['livraison']!=1){
+				if(($verif2[0]['livraison']!=1) && ($verif2[0]['valide']==1)){
 						
 						StatutLivraison($nextIdCom, 1);  //FIXME FAIRE CHANGER STOCK
 
@@ -236,10 +242,9 @@ session_start();
 					}}
 				} else {
 
-					$verif = "SELECT livraison FROM commandes where id_commande ='$idCom'";
+					$verif = "SELECT livraison, valide FROM commandes where id_commande ='$idCom'";
 						$verif2 = parcoursRs(SQLSelect($verif));
-					if($verif2[0]['livraison']!=1){
-
+				if(($verif2[0]['livraison']!=1) && ($verif2[0]['valide']==1)){
 					StatutLivraison($idCom,1); 
 					$SQL = "SELECT commandes.id_commande , panier.quantite, panier.id_produit
 						FROM commandes

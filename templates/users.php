@@ -67,6 +67,7 @@ if (!valider("connecte", "SESSION")) {
 		<p class="lead">
 
 		<h2>Utilisateurs de la base </h2>
+		<p>Veuillez consultez les utilisateurs présents dans le site web et ceux qui sont bannis jusqu'à changement. </p>
 
 		<button type="submit"  value="" class="button-50" style="width : auto; margin:auto; display:block;  background-color:#6495ed ; " onclick="affConex('autoriz','non_autoriz','bouttonOuvr')">Utilisateurs autorisées</button>
 	</br>
@@ -188,6 +189,8 @@ if (!valider("connecte", "SESSION")) {
 
 	<h2>Liste des commandes</h2>
 
+	<p>Dans cette partie, vous pouvez gerer les commandes et consultez leurs détails.</p>
+
 
 	<?php
 	$stock = listerCommande();
@@ -308,9 +311,11 @@ if (!valider("connecte", "SESSION")) {
 	mkInput("submit", "action", "Valider la commande", "", "button-40");
 	mkInput("submit", "action", "Annuler la commande", "", "button-40");
 	mkInput("submit", "action", "Valider livraison", "", "button-40");
+	echo "<p style=\"color:red;\"> <strong>*Pour qu'une commande soit archivée et que le stock soit modifié vous devez valider la commande puis valider la livraison</br>*En validant la livraison, le stock sera modifié en fonction des articles commandés.</strong></p>";
+
 	echo ("</br>");
 	echo ("</br>");
-	mkInput("submit", "action", "Supprimer la commande", "", "button-40");
+	mkInput("submit", "action", "Supprimer la commande", "", "button-40","background-color : #cc0000;");
 	//	mkInput("submit","action","Retrograder");
 	//	mkInput("submit","action","Promouvoir");
 
@@ -344,7 +349,7 @@ if (!valider("connecte", "SESSION")) {
 		mkSelect("idUser", $users, "id", "pseudo", $lastIdUser, "blacklist");
 		mkInput("submit", "action", "Interdire", "", "button-40");
 		mkInput("submit", "action", "Autoriser", "", "button-40");
-		mkInput("submit", "action", "Supprimer", "", "button-40");
+		mkInput("submit", "action", "Supprimer", "", "button-40","background-color : #cc0000;");
 		mkInput("submit", "action", "Retrograder", "", "button-40");
 		mkInput("submit", "action", "Promouvoir", "", "button-40");
 

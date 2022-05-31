@@ -23,6 +23,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Simplify2I</title>
 	<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+	     <link rel="icon" type="image/png" href="ressources/fav-iconTRANSP.png" />
 
 	<!-- Liaisons aux fichiers css de Bootstrap -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
