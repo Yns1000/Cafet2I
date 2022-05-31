@@ -32,15 +32,15 @@ $panier  = new panier();
 if(isset($_GET['id'])){
     echo "</br></br></br></br></br></br></br></br></br></br>";
 
-    $produit = listerPanier('select * from produits where reference =:id', array('id' => $_GET['id']) );
+    $produit = listerPanier('select * from produits where dispo = 1 and reference =:id', array('id' => $_GET['id']) );
     if(empty($produit))
-    die("Votre panier est vide !");
+    die("<h1>Ce produit n'est pas disponible et n'a donc pas été ajouté au panier !</h1>");
 
     $panier->add($produit[0]->reference);
     die("Le produit a bien été ajouté à votre panier <a  style=\"font-size : 18px; color:#334277\" href=\"javascript:history.back()\"> retourner sur le catalogue</a> ou <a  style=\"font-size : 18px; color:#334277\" href=\"index.php?view=paiements\"> allez dans votre panier</strong></a> ");
 
 }else{
-    die("Votre panier est vide !");
+    die("<h1>Votre panier est vide !</h1>");
 }
 
 

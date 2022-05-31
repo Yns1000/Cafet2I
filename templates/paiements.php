@@ -69,12 +69,12 @@ if (!valider("connecte", "SESSION")) {
           echo "\" alt=\"Article mis en vente\"> </img></div>
   <div class=\"colone gen\" data-label=\"Numéro commande\" style=\" padding-top:25px;\">" . $produit[$x]->reference . "</div>
   <div class=\"colone gen\" data-label=\"Prenom\" style=\" padding-top:25px;\">" . $produit[$x]->nom_prod . "</div>
-  <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]->prix . "</div>
+  <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]->prix . "€</div>
   <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">";
           if (!empty($_SESSION['panier'][$produit[$x]->reference])) echo $_SESSION['panier'][$produit[$x]->reference];
           echo "</div>
   <div class=\"colone gen\" data-label=\"Promo\" style=\" padding-top:25px;\">"  . $produit[$x]->categorie . "</div>
-  <a href=\"index.php?view=paiements&det=" . $produit[$x]->reference . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-top:15px; padding-left:13px\"> <div class=\"button-60\">Supprimer articles</div></a>
+  <a style=\"text-decoration:none;\" href=\"index.php?view=paiements&det=" . $produit[$x]->reference . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-top:15px; padding-left:13px\"> <div class=\"button-60\">Supprimer articles</div></a>
 </div></li>";
           $couleur = 0;
           $chosen = 1;
@@ -84,12 +84,12 @@ if (!valider("connecte", "SESSION")) {
   <div class=\"blockPhoto imge\"><img class=\"photoprod2\" src=\"" . $produit[$x]->lien_photo . "\" alt=\"Article mis en vente\"> </img></div>
   <div class=\"colone gen\" data-label=\"Numéro commande\" style=\" padding-top:25px;\">" . $produit[$x]->reference . "</div>
   <div class=\"colone gen\" data-label=\"Prenom\" style=\" padding-top:25px;\">" . $produit[$x]->nom_prod . "</div>
-  <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]->prix . "</div>
+  <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]->prix . "€</div>
   <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">";
           if (!empty($_SESSION['panier'][$produit[$x]->reference])) echo $_SESSION['panier'][$produit[$x]->reference];
           echo "</div>
   <div class=\"colone gen\" data-label=\"Promo\" style=\" padding-top:25px;\">"  . $produit[$x]->categorie . "</div>
-<a href=\"index.php?view=paiements&det=" . $produit[$x]->reference . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-top:15px; padding-left:13px\"> <div class=\"button-60\">Supprimer articles</div></a>
+<a style=\"text-decoration:none;\" href=\"index.php?view=paiements&det=" . $produit[$x]->reference . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-top:15px; padding-left:13px\"> <div class=\"button-60\">Supprimer articles</div></a>
 </div></li>";
           $couleur = 1;
           $chosen = 1;
@@ -151,11 +151,11 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
     echo '</br>';
     $date = date('Y-m-d');
     echo '</br>';
-    if(empty($_SESSION['panier']['ID_Panier'])){
-    $_SESSION['panierConfirm']['total'] = $total;
-    $_SESSION['panierConfirm']['date_panier'] = $date;
-    $_SESSION['panierConfirm']['Id_User'] = $ID_User;
-    $_SESSION['panierConfirm']['ID_Panier'] = $NextId;
+    if (empty($_SESSION['panier']['ID_Panier'])) {
+      $_SESSION['panierConfirm']['total'] = $total;
+      $_SESSION['panierConfirm']['date_panier'] = $date;
+      $_SESSION['panierConfirm']['Id_User'] = $ID_User;
+      $_SESSION['panierConfirm']['ID_Panier'] = $NextId;
     }
 
 
@@ -166,56 +166,56 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 
 
 
-  <div id="paypal-button-container"></div>
+    <div id="paypal-button-container"></div>
 
-  <script src="https://www.paypal.com/sdk/js?client-id=Ae_4Ntm-HUjAR3cV-G6nSwf8xPpD7U7P5MaVRjBoeH8pb-n0xJP-hOAUZJakbt6goQ7jFUV6QfiXecWf&currency=EUR"></script>
-  <script>
-    var total = '<?php echo $total; ?>';
-    var IdUser = '<?php echo $ID_User; ?>';
-    var NexID = '<?php echo $NextId; ?>';
-    var date = '<?php echo $date; ?>';
-    var valid = 0;
-    paypal.Buttons({
-      // Sets up the transaction when a payment button is clicked
-      createOrder: (data, actions) => {
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: total // TODO REMPLACER PAR TOTAL DES ARTICLES 
-            }
-          }]
-        });
-      },
-      // Finalize the transaction after payer approval
-      onApprove: (data, actions) => {
-        
+    <script src="https://www.paypal.com/sdk/js?client-id=Ae_4Ntm-HUjAR3cV-G6nSwf8xPpD7U7P5MaVRjBoeH8pb-n0xJP-hOAUZJakbt6goQ7jFUV6QfiXecWf&currency=EUR"></script>
+    <script>
+      var total = '<?php echo $total; ?>';
+      var IdUser = '<?php echo $ID_User; ?>';
+      var NexID = '<?php echo $NextId; ?>';
+      var date = '<?php echo $date; ?>';
+      var valid = 0;
+      paypal.Buttons({
+        // Sets up the transaction when a payment button is clicked
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: total // TODO REMPLACER PAR TOTAL DES ARTICLES 
+              }
+            }]
+          });
+        },
+        // Finalize the transaction after payer approval
+        onApprove: (data, actions) => {
 
-        return actions.order.capture().then(function(orderData) {
-          
-          // Successful capture! For dev/demo purposes:
-          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-          const transaction = orderData.purchase_units[0].payments.captures[0];
-          // valid = 1;
-          //FIXME TEST TRANSAC alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-          // When ready to go live, remove the alert and show a success message within this page. For example:
-          // const element = document.getElementById('paypal-button-container');
-          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-          // Or go to another URL:  actions.redirect('thank_you.html');
-          actions.redirect('http://localhost/Cafet2I/index.php?view=validOrder&msg=Paiement+valide');
 
-        });
+          return actions.order.capture().then(function(orderData) {
 
-      },
-       onCancel: function(data, actions) {
-      actions.redirect('http://localhost/Cafet2I/index.php?view=validOrder&msg2=Paiement+non+valide');
+            // Successful capture! For dev/demo purposes:
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            const transaction = orderData.purchase_units[0].payments.captures[0];
+            // valid = 1;
+            //FIXME TEST TRANSAC alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+            // When ready to go live, remove the alert and show a success message within this page. For example:
+            // const element = document.getElementById('paypal-button-container');
+            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            // Or go to another URL:  actions.redirect('thank_you.html');
+            actions.redirect('http://localhost/Cafet2I/index.php?view=validOrder&msg=Paiement+valide');
 
-      }
-    }).render('#paypal-button-container');
+          });
 
-    /* if (valid == 1){
-     }*/
-  </script>
-    </div>
+        },
+        onCancel: function(data, actions) {
+          actions.redirect('http://localhost/Cafet2I/index.php?view=validOrder&msg2=Paiement+non+valide');
+
+        }
+      }).render('#paypal-button-container');
+
+      /* if (valid == 1){
+       }*/
+    </script>
+  </div>
 <?php
   /*
 	mkForm("controleur.php"); 
@@ -227,5 +227,3 @@ if (basename($_SERVER["PHP_SELF"]) != "index.php")
 }
 
 ?>
-
-

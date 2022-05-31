@@ -209,11 +209,54 @@ session_start();
 				if (isAdmin($_SESSION["idUser"])) 
 				if (is_array($idCom)) {
 					foreach($idCom as $nextIdCom) {
-						StatutLivraison($nextIdCom, 1); 
-					}
+
+						$verif = "SELECT livraison FROM commandes where id_commande ='$idCom'";
+						$verif2 = parcoursRs(SQLSelect($verif));
+					if($verif2[0]['livraison']!=1){
+						
+						StatutLivraison($nextIdCom, 1);  //FIXME FAIRE CHANGER STOCK
+
+						
+						$SQL = "SELECT commandes.id_commande , panier.quantite, panier.id_produit
+						FROM commandes
+						JOIN panier
+						ON commandes.id_commande = panier.id_panier
+						WHERE id_commande = '$NextIdCom'";
+					
+							$panier = parcoursRs(SQLSelect($SQL));
+							$newSQL = "";
+							for ($x = 0; $x <= count($panier) - 1; $x++) {
+								$nbProd = $panier[$x]['quantite'];
+								$ref = $panier[$x]['id_produit'];
+								$newSQL .= "UPDATE produits SET quantite = quantite-'$nbProd' WHERE reference = '$ref';";
+									
+							}
+							SQLUpdate($newSQL);
+
+					}}
 				} else {
+
+					$verif = "SELECT livraison FROM commandes where id_commande ='$idCom'";
+						$verif2 = parcoursRs(SQLSelect($verif));
+					if($verif2[0]['livraison']!=1){
+
 					StatutLivraison($idCom,1); 
-				}
+					$SQL = "SELECT commandes.id_commande , panier.quantite, panier.id_produit
+						FROM commandes
+						JOIN panier
+						ON commandes.id_commande = panier.id_panier
+						WHERE id_commande = '$idCom'";
+					
+							$panier = parcoursRs(SQLSelect($SQL));
+							$newSQL = "";
+							for ($x = 0; $x <= count($panier) - 1; $x++) {
+								$nbProd = $panier[$x]['quantite'];
+								$ref = $panier[$x]['id_produit'];
+								$newSQL .= "UPDATE produits SET quantite = quantite-'$nbProd' WHERE reference = '$ref';";
+									
+							}
+							SQLUpdate($newSQL);
+					}}
 				
 				// 2) choisir la vue suivante en lui passant les paramètres nécessaires 
 				$qs = "?view=users&lastIdCom=$idUser"; 
@@ -600,15 +643,3 @@ session_start();
 		$t = explode('=',$qs);
 		$dataQS[$t[0]]=$t[1]; 
 	}
-	
-?>
-
-
-
-
-
-
-
-
-
-

@@ -140,7 +140,7 @@ function endForm()
 	echo "</form>\n";
 }
 
-function mkInput($type,$name,$value="",$misc=[],$class="")
+function mkInput($type,$name,$value="",$misc=[],$class="", $style="")
 {
 	// Produit un champ formulaire
 	$id = "";
@@ -152,7 +152,7 @@ function mkInput($type,$name,$value="",$misc=[],$class="")
 	if (isset($misc["checked"]) && $misc["checked"]) {
   	$sel = " checked=\"checked\"";
 	}
-	$res = "<input$id class=\"$class\" type=\"$type\" name=\"$name\" value=\"$value\"$sel />\n";
+	$res = "<input$id style=\"$style\" class=\"$class\" type=\"$type\" name=\"$name\" value=\"$value\"$sel />\n";
 	if (isset($misc["id"]) && isset($misc["label"])) {
 	  $label = "<label for=\"$misc[id]\">$misc[label]</label>\n";
   	if (isset($misc["positionLabel"]) && $misc["positionLabel"] === "après") {

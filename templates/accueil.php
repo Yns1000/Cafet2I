@@ -129,12 +129,16 @@ switch($page_filtre){
 
 	for ($x = 0; $x <= count($stock)-1; $x++) {
 
-
+if($stock[$x]["dispo"]==1)
         echo "<div class=\"articles\">
         <div class=\"blockPhoto\">
         <img class=\"photoprod\" src=\"" . $stock[$x]["lien_photo"] . "\" alt=\"Article mis en vente\"> </img></div>
-        <div class=\"nomProd\"><h3>". $stock[$x]["nom_prod"] ."</h3><h2 class=\"prixProd\">". $stock[$x]["prix"] ." € </h2><a href=\"index.php?view=addpanier&id=". $stock[$x]["reference"] ."\" class=\"panier\">Au Panier</a></div></div>";
-
+        <div class=\"nomProd\"><h3>". $stock[$x]["nom_prod"] ."</h3><h2 class=\"prixProd\">". $stock[$x]["prix"] ." € </h2><a href=\"index.php?view=addpanier&id=". $stock[$x]["reference"] ."\" style=\"color:#fff\" class=\"panier\">Au Panier</a></div></div>";
+else
+echo "<div class=\"articles\">
+        <div class=\"blockPhoto\">
+        <img class=\"photoprod\" src=\"" . $stock[$x]["lien_photo"] . "\" alt=\"Article mis en vente\"> </img></div>
+        <div class=\"nomProd\"><h3>". $stock[$x]["nom_prod"] ."</h3><h2 class=\"prixProd\">". $stock[$x]["prix"] ." € </h2><a href=\"index.php?view=addpanier&id=". $stock[$x]["reference"] ."\" style=\"background-color : #cc0000; color:#fff\" class=\"panier\">Indisponible</a></div></div>";
     }
 ?>
   

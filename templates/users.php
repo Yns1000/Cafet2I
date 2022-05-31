@@ -78,7 +78,7 @@ if (!valider("connecte", "SESSION")) {
 
 
 		<?php
-				echo "<div id=\"autoriz\" style=\"display:none\">";
+				echo "<div id=\"autoriz\" style=\"display:none\"><hr />";
 
 		echo "<h3 style=\"text-align : center;\">Liste des utilisateurs autorisés de la base :</h3>";
 		$users = listerUtilisateurs("nbl");
@@ -184,6 +184,153 @@ if (!valider("connecte", "SESSION")) {
 		?>
 		</div></div></ul><hr />
 
+
+
+	<h2>Liste des commandes</h2>
+
+
+	<?php
+	$stock = listerCommande();
+	//mkTable($stock, array("id_commande", "nom", "prenom", "promo", "montant", "valide", "livraison"));
+	//echo "<strong><p style=\"color : red;\"> Si valide = 1 : la commande est validée </br> Si valide = 0 : la commande est annulée </br> Si livaison = 1 : la commande est prête à être cherchée </br> Si livaison = 0 : la commande n'est pas prête à être cherchée </p></strong>";
+
+	// TODO
+	//$stock=listestocks("tout");
+	//tprint($stock);
+	?>
+	<!-- HTML !-->
+	<input id="button1" onclick="affListe('list', 'button1', 'button2')" class="button-40" type="button"  style="background-color:#6495ed ;" value="Afficher liste de commandes">
+	<input id="button2" onclick="affListe('list', 'button1', 'button2')" class="button-40" type="button"  style="background-color:#ce2029 ;" value="Fermer liste de commandes">
+
+
+
+	<!-- <input onclick="affListe()" class="favorite styled" type="button" value="Afficher les commandes"> -->
+	<?php
+
+	echo "<div class=\"container2\" id=\"list\">";
+	/*for ($x = 0; $x <= count($stock) - 1; $x++) {
+		//$num =intval(mkLigne($stock[$x]));  
+		//$nom = mkLigne($stock[$x]);  
+		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 0)) //1       
+			echo '</br>
+  <div  style="border : solid #51484f 3px; font-family: \'Lato\', sans-serif; color : #fff; font-size : 18px; text-align : center ; background-color : #006400; padding : 10px">En attente de livraison </br>Numéro de commande &nbsp&nbsp&nbsp : &nbsp&nbsp&nbsp ' . $stock[$x]["id_commande"] . '</br>Prenom : ' . $stock[$x]["prenom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Nom :  ' . $stock[$x]["nom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Promo : ' . $stock[$x]["promo"] . '</br>Produit : ' . $stock[$x]["nom_prod"] . '
+  </div>';
+		if ($stock[$x]["valide"] == 0) //1       
+			echo '</br>
+  <div style="border : solid #51484f 3px; font-family: \'Lato\', sans-serif; color : #fff; font-size : 18px; text-align : center ; background-color : #b22222; padding : 10px">Commande annulée </br>Numéro de commande &nbsp&nbsp&nbsp : &nbsp&nbsp&nbsp ' . $stock[$x]["id_commande"] . '</br>Prenom : ' . $stock[$x]["prenom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Nom :  ' . $stock[$x]["nom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Promo : ' . $stock[$x]["promo"] . '</br>Produit : ' . $stock[$x]["nom_prod"] . '
+  </div>';
+		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 1)) //1       
+			echo '</br>
+  <div style="border : solid #51484f 3px; font-family: \'Lato\', sans-serif; color : #fff; font-size : 18px; text-align : center ; background-color : #26619c; padding : 10px">Livré ! </br> Numéro de commande &nbsp&nbsp&nbsp : &nbsp&nbsp&nbsp ' . $stock[$x]["id_commande"] . '</br>Prenom : ' . $stock[$x]["prenom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Nom :  ' . $stock[$x]["nom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Promo : ' . $stock[$x]["promo"] . '</br>Produit : ' . $stock[$x]["nom_prod"] . '
+  </div>';
+	}
+	echo "</div>"; */
+
+	echo "<hr />";
+
+	echo "<div class=\"container2\">
+  <ul class=\"Commandes\">
+    <li class=\"titres\">
+      <div class=\"colone gen\">Numéro commande</div>
+      <div class=\"colone gen\">Prenom</div>
+      <div class=\"colone gen\">Nom</div>
+	  <div class=\"colone gen\">Promo</div>
+	  <div class=\"colone gen\">Montant (€)</div>
+      <div class=\"colone gen\">Statut du paiment</div>
+	  <div style=\"right : 0px; padding-left:35px; margin:0;\" class=\"colone gen\">Voir détail</div>
+
+    </li>";
+
+	for ($x = 0; $x <= count($stock) - 1; $x++) {
+
+		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 1))
+			echo "<li style=\"color : #fff; background-color : #26619c;\" class=\"table-row\">
+      <div class=\"colone gen\" data-label=\"Numéro commande\">" . $stock[$x]["id_commande"] . "</div>
+      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Statut commande\">Ancienne commande finalisée</div>
+	  <a href=\"index.php?view=facture&idCom=" . $stock[$x]["id_commande"] . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-left:15px; margin:0;\" > <div class=\"button-60\" style=\"background-color : #383838; color:#fff; margin:0;\">Voir plus d'info</div></a>
+    </li>";
+
+		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 0))
+			echo "<li style=\"color : #fff; background-color : #2e8b57;\" class=\"table-row\">
+      <div class=\"colone gen\" data-label=\"Numéro commande\">" . $stock[$x]["id_commande"] . "</div>
+      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Statut commande\">Commande en attente de livraison</div>
+	  <a href=\"index.php?view=facture&idCom=" . $stock[$x]["id_commande"] . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-left:15px; margin:0;\" > <div class=\"button-60\" style=\"background-color : #383838; color:#fff; margin:0;\">Voir plus d'info</div></a>
+    </li>";
+
+		if (($stock[$x]["valide"] == 0) && ($stock[$x]["livraison"] == 0))
+			echo "<li style=\"color : #fff; background-color : #b22222;\" class=\"table-row\">
+      <div class=\"colone gen\" data-label=\"Numéro commande\">" . $stock[$x]["id_commande"] . "</div>
+      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Statut du paiment\">Commande annulée</div>
+	  <a href=\"index.php?view=facture&idCom=" . $stock[$x]["id_commande"] . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-left:15px; margin:0;\" > <div class=\"button-60\" style=\"background-color : #383838; color:#fff; margin:0;\">Voir plus d'info</div></a>
+    </li>";
+
+		if (($stock[$x]["valide"] == 0) && ($stock[$x]["livraison"] == 1))
+			echo "<li style=\"color : #fff; background-color : #b22222;\" class=\"table-row\">
+      <div class=\"colone gen\" data-label=\"Numero Commande\">" . $stock[$x]["id_commande"] . "</div>
+      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
+      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
+	  <div class=\"colone gen\" data-label=\"Statut commande\">Commande annulée</div>
+	  <a href=\"index.php?view=facture&idCom=" . $stock[$x]["id_commande"] . "\"><div class=\"colone \" data-label=\"Nom du produit\" style=\"right : 0px; padding-left:15px; margin:0;\" > <div class=\"button-60\" style=\"background-color : #383838; color:#fff; margin:0;\">Voir plus d'info</div></a>
+	  </li>";
+	}
+
+	echo "  </ul>
+	</div></div>";
+	?>
+<hr />
+	<h2>Gestion des commandes</h2>
+	<?php
+	mkForm("controleur.php"); //FIXME A SIMPLIFIER
+	mkInput("hidden", "entite", "produit");
+
+	$commande = listerCommande(); // produits par parcoursRs(recordset mysql)
+	$lastCom = valider("lastIdCom");
+	mkSelect("idCom", $commande, "id_commande", "prenom", $lastCom, "montant");
+
+	/*	$produit = listerStock(); // produits par parcoursRs(recordset mysql)
+			$lastProd = valider("lastProd");
+			mkSelect("idProd",$produit,"reference","reference",$lastProd,"nom_prod"); */
+
+	mkInput("submit", "action", "Valider la commande", "", "button-40");
+	mkInput("submit", "action", "Annuler la commande", "", "button-40");
+	mkInput("submit", "action", "Valider livraison", "", "button-40");
+	echo ("</br>");
+	echo ("</br>");
+	mkInput("submit", "action", "Supprimer la commande", "", "button-40");
+	//	mkInput("submit","action","Retrograder");
+	//	mkInput("submit","action","Promouvoir");
+
+	/*			
+			$colors = array(); 
+			$colors[] = array("nom"=>"rouge", "code"=>"red");
+			$colors[] = array("nom"=>"orange", "code"=>"orange");
+			$colors[] = array("nom"=>"gris", "code"=>"grey");
+			$colors[] = array("nom"=>"bleu", "code"=>"blue");							
+			// tprint($colors);					 
+			mkSelect("color",$colors,"code","nom");
+*/
+
+	//	mkInput("color","color","");
+	//mkInput("submit","action","Changer Couleur");		
+	endForm();
+
+	?>
+
+<hr />
 
 		<h2>Gestion des utilisateurs</h2>
 
@@ -348,11 +495,11 @@ if (!valider("connecte", "SESSION")) {
 		mkInput("submit", "action", "Ajouter stock", "", "button-40");
 
 
-		echo "</br></br><hr />";
+		echo "</br><hr />";
 		mkInput("submit", "action", "Disponible", "", "button-40");
 		mkInput("submit", "action", "Indisponible", "", "button-40");
 		echo ("</br></br>");
-		mkInput("submit", "action", "Supprimer le produit", "", "button-40");
+		mkInput("submit", "action", "Supprimer le produit","", "button-40","background-color : #cc0000;");
 		//	mkInput("submit","action","Retrograder");
 		//	mkInput("submit","action","Promouvoir");
 
@@ -370,9 +517,9 @@ if (!valider("connecte", "SESSION")) {
 		//mkInput("submit","action","Changer Couleur");
 
 		endForm();
-		echo "</br>		<hr />";
+		echo "<hr />";
 		mkForm("controleur.php");
-		echo "<strong>Nouveau Produit :</strong></br></br>";
+		echo "<h2><strong>Nouveau Produit :</strong></h2></br>";
 		echo "Nom du produit: </br>";
 		mkInput("text", "nomProd", "", ["id" => "textNom"], "form__field format");
 		echo "</br>";
@@ -433,149 +580,9 @@ if (!valider("connecte", "SESSION")) {
 		?>
 
 	<?php
-	}	// fin si user est admin 
+	}}	// fin si user est admin 
 	?>
 
 	</p>
 
-	<hr />
-
-
-	<h2>Liste des commandes</h2>
-
-
-	<?php
-	$stock = listerCommande();
-	//mkTable($stock, array("id_commande", "nom", "prenom", "promo", "montant", "valide", "livraison"));
-	//echo "<strong><p style=\"color : red;\"> Si valide = 1 : la commande est validée </br> Si valide = 0 : la commande est annulée </br> Si livaison = 1 : la commande est prête à être cherchée </br> Si livaison = 0 : la commande n'est pas prête à être cherchée </p></strong>";
-
-	// TODO
-	//$stock=listestocks("tout");
-	//tprint($stock);
-	?>
-	<!-- HTML !-->
-	<input id="button1" onclick="affListe('list', 'button1', 'button2')" class="button-40" type="button"  style="background-color:#6495ed ;" value="Afficher liste de commandes">
-	<input id="button2" onclick="affListe('list', 'button1', 'button2')" class="button-40" type="button"  style="background-color:#ce2029 ;" value="Fermer liste de commandes">
-
-
-
-	<!-- <input onclick="affListe()" class="favorite styled" type="button" value="Afficher les commandes"> -->
-	<?php
-
-	echo "<div class=\"container2\" id=\"list\">";
-	/*for ($x = 0; $x <= count($stock) - 1; $x++) {
-		//$num =intval(mkLigne($stock[$x]));  
-		//$nom = mkLigne($stock[$x]);  
-		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 0)) //1       
-			echo '</br>
-  <div  style="border : solid #51484f 3px; font-family: \'Lato\', sans-serif; color : #fff; font-size : 18px; text-align : center ; background-color : #006400; padding : 10px">En attente de livraison </br>Numéro de commande &nbsp&nbsp&nbsp : &nbsp&nbsp&nbsp ' . $stock[$x]["id_commande"] . '</br>Prenom : ' . $stock[$x]["prenom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Nom :  ' . $stock[$x]["nom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Promo : ' . $stock[$x]["promo"] . '</br>Produit : ' . $stock[$x]["nom_prod"] . '
-  </div>';
-		if ($stock[$x]["valide"] == 0) //1       
-			echo '</br>
-  <div style="border : solid #51484f 3px; font-family: \'Lato\', sans-serif; color : #fff; font-size : 18px; text-align : center ; background-color : #b22222; padding : 10px">Commande annulée </br>Numéro de commande &nbsp&nbsp&nbsp : &nbsp&nbsp&nbsp ' . $stock[$x]["id_commande"] . '</br>Prenom : ' . $stock[$x]["prenom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Nom :  ' . $stock[$x]["nom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Promo : ' . $stock[$x]["promo"] . '</br>Produit : ' . $stock[$x]["nom_prod"] . '
-  </div>';
-		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 1)) //1       
-			echo '</br>
-  <div style="border : solid #51484f 3px; font-family: \'Lato\', sans-serif; color : #fff; font-size : 18px; text-align : center ; background-color : #26619c; padding : 10px">Livré ! </br> Numéro de commande &nbsp&nbsp&nbsp : &nbsp&nbsp&nbsp ' . $stock[$x]["id_commande"] . '</br>Prenom : ' . $stock[$x]["prenom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Nom :  ' . $stock[$x]["nom"] . ' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Promo : ' . $stock[$x]["promo"] . '</br>Produit : ' . $stock[$x]["nom_prod"] . '
-  </div>';
-	}
-	echo "</div>"; */
-
-	echo "<hr />";
-
-	echo "<div class=\"container2\">
-  <ul class=\"Commandes\">
-    <li class=\"titres\">
-      <div class=\"colone gen\">Numéro commande</div>
-      <div class=\"colone gen\">Prenom</div>
-      <div class=\"colone gen\">Nom</div>
-	  <div class=\"colone gen\">Promo</div>
-	  <div class=\"colone gen\">Montant (€)</div>
-      <div class=\"colone gen\">Statut du paiment</div>
-    </li>";
-
-	for ($x = 0; $x <= count($stock) - 1; $x++) {
-
-		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 1))
-			echo "<li style=\"color : #fff; background-color : #26619c;\" class=\"table-row\">
-      <div class=\"colone gen\" data-label=\"Numéro commande\">" . $stock[$x]["id_commande"] . "</div>
-      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Statut commande\">Ancienne commande finalisée</div>
-    </li>";
-
-		if (($stock[$x]["valide"] == 1) && ($stock[$x]["livraison"] == 0))
-			echo "<li style=\"color : #fff; background-color : #2e8b57;\" class=\"table-row\">
-      <div class=\"colone gen\" data-label=\"Numéro commande\">" . $stock[$x]["id_commande"] . "</div>
-      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Statut commande\">Commande en attente de livraison</div>
-    </li>";
-
-		if (($stock[$x]["valide"] == 0) && ($stock[$x]["livraison"] == 0))
-			echo "<li style=\"color : #fff; background-color : #b22222;\" class=\"table-row\">
-      <div class=\"colone gen\" data-label=\"Numéro commande\">" . $stock[$x]["id_commande"] . "</div>
-      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Statut du paiment\">Commande annulée</div>
-    </li>";
-
-		if (($stock[$x]["valide"] == 0) && ($stock[$x]["livraison"] == 1))
-			echo "<li style=\"color : #fff; background-color : #b22222;\" class=\"table-row\">
-      <div class=\"colone gen\" data-label=\"Numero Commande\">" . $stock[$x]["id_commande"] . "</div>
-      <div class=\"colone gen\" data-label=\"Prenom\">" . $stock[$x]["prenom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Nom\">" . $stock[$x]["nom"] . "</div>
-      <div class=\"colone gen\" data-label=\"Promo\">"  . $stock[$x]["promo"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Montant\">"  . $stock[$x]["montant"] . "</div>
-	  <div class=\"colone gen\" data-label=\"Statut commande\">Commande annulée</div>
-    </li>";
-	}
-
-	echo "  </ul>
-	</div></div>";
-	?>
-
-	<h2>Gestion des commandes</h2>
-	<?php
-	mkForm("controleur.php"); //FIXME A SIMPLIFIER
-	mkInput("hidden", "entite", "produit");
-
-	$commande = listerCommande(); // produits par parcoursRs(recordset mysql)
-	$lastCom = valider("lastIdCom");
-	mkSelect("idCom", $commande, "id_commande", "prenom", $lastCom, "montant");
-
-	/*	$produit = listerStock(); // produits par parcoursRs(recordset mysql)
-			$lastProd = valider("lastProd");
-			mkSelect("idProd",$produit,"reference","reference",$lastProd,"nom_prod"); */
-
-	mkInput("submit", "action", "Valider la commande", "", "button-40");
-	mkInput("submit", "action", "Annuler la commande", "", "button-40");
-	mkInput("submit", "action", "Valider livraison", "", "button-40");
-	echo ("</br>");
-	echo ("</br>");
-	mkInput("submit", "action", "Supprimer la commande", "", "button-40");
-	//	mkInput("submit","action","Retrograder");
-	//	mkInput("submit","action","Promouvoir");
-
-	/*			
-			$colors = array(); 
-			$colors[] = array("nom"=>"rouge", "code"=>"red");
-			$colors[] = array("nom"=>"orange", "code"=>"orange");
-			$colors[] = array("nom"=>"gris", "code"=>"grey");
-			$colors[] = array("nom"=>"bleu", "code"=>"blue");							
-			// tprint($colors);					 
-			mkSelect("color",$colors,"code","nom");
-*/
-
-	//	mkInput("color","color","");
-	//mkInput("submit","action","Changer Couleur");		
-	endForm();
-}
-	?>
-
+	

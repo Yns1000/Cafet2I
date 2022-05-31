@@ -89,15 +89,15 @@ if (!valider("connecte","SESSION")) {
 
 	echo "<div id=\"mdp\">";
 	
-	mkInput("password", "passe", "", ["id" => "textChangerPassword", "label" => "Ancien mot de passe : "]);
+	mkInput("password", "passe", "", ["id" => "textChangerPassword", "label" => "Ancien mot de passe : "],"form__field");
 	echo "</br>";
-	mkInput("password", "passe", "", ["id" => "textChangerPassword", "label" => "Nouveau mot de passe : "]);
-	mkInput("submit", "action", "Accepter modifications");
+	mkInput("password", "passe", "", ["id" => "textChangerPassword", "label" => "Nouveau mot de passe : "],"form__field");
+	mkInput("submit", "action", "Accepter modifications","","button-40");
 	echo "</div>";
 
 	echo "<div id=\"pseudo\">";
-	mkInput("pseudo", "pseudo", "", ["id" => "textChangerPseudo", "label" => "Nouveau pseudo : "]);
-	mkInput("submit", "action", "Accepter modifications");
+	mkInput("pseudo", "pseudo", "", ["id" => "textChangerPseudo", "label" => "Nouveau pseudo : "],"form__field");
+	mkInput("submit", "action", "Accepter modifications","","button-40");
 	echo "</div>";
 
 $Utilisateur = $_SESSION["idUser"];

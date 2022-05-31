@@ -73,7 +73,7 @@ else{
                 echo $produit[$x]['lien_photo'];
                 echo "\" alt=\"Article mis en vente\"> </img></div>
     <div class=\"colone gen\" data-label=\"Prenom\" style=\" padding-top:25px;\">" . $produit[$x]['nom_prod'] . "</div>
-    <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]['prix'] . "</div>
+    <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]['prix'] . "€</div>
     <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]['quantite'] . "</div>
     </li>";
                 $couleur = 0;
@@ -83,7 +83,7 @@ else{
                 echo "<li style=\"color : #333333; background-color : #fff;\" class=\"table-row\">
     <div class=\"blockPhoto imge\"><img class=\"photoprod2\" src=\"" . $produit[$x]['lien_photo'] . "\" alt=\"Article mis en vente\"> </img></div>
 <div class=\"colone gen\" data-label=\"Prenom\" style=\" padding-top:25px;\">" . $produit[$x]['nom_prod'] . "</div>
-<div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]['prix'] . "</div>
+<div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]['prix'] . "€</div>
 <div class=\"colone gen\" data-label=\"Nom\" style=\" padding-top:25px;\">" . $produit[$x]['quantite'] . "</div>
 </li>";
                 $couleur = 1;

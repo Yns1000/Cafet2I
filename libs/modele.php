@@ -160,6 +160,9 @@ function StatutCommande($idCommande, $statut)
 function StatutLivraison($idCommande, $statut)
 {
 	// cette fonction change le statut de validation de la commande  
+	
+
+	
 	if($statut==1)
 	$SQL = "UPDATE commandes SET livraison=1 WHERE id_commande='$idCommande'";
 	else if($statut==0)
@@ -312,7 +315,8 @@ function supprimerUser($idUser)
 function supprimerCommande($idCom)
 {
 	// cette fonction fait de l'utilisateur un simple mortel
-	$SQL = "DELETE FROM commandes WHERE id='$idCom'";
+	$SQL = "DELETE FROM panier WHERE id_panier='$idCom';
+	DELETE FROM commandes WHERE id_commande='$idCom'";
 	echo $SQL; 
 	return SQLDelete($SQL);
 }
